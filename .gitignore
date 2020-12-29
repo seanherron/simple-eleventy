@@ -1,0 +1,12 @@
+# .gitignore
+# node.js artifacts
+node_modules
+# Build artifacts
+dist
+.tmp
+.env
+# Random files your computer may generate
+.vscode
+.DS_Store
+.AppleDouble
+.LSOverride
