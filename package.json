@@ -4,7 +4,12 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "npm-run-all build:css build:html",
+    "build:css": "postcss src/site/_includes/css/style.css -o ./.tmp/css/style.css",
+    "build:html": "eleventy",
+    "watch": "npm-run-all --parallel watch:css watch:html",
+    "watch:css": "postcss src/site/_includes/css/style.css -o ./.tmp/css/style.css --watch",
+    "watch:html": "eleventy --serve --port=8182"
   },
   "author": "",
   "license": "ISC",
