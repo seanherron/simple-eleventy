@@ -1,0 +1,11 @@
+---
+layout: base
+pageClass: posts
+templateEngineOverride: njk, md
+---
+<header>
+  <h1 class="title">{{ title }}</h1>
+  <h2 class="subtitle">{{ subtitle }}</h2>
+</header>
+
+{{ content | safe }}
