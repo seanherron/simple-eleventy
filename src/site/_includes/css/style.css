@@ -1,6 +1,8 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+/* Replace prism.css with a different theme if desired */
+@import "./prism.css";
 
 @layer base {
   h1 {

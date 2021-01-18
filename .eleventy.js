@@ -1,16 +1,42 @@
-module.exports = function(eleventyConfig) {
+const { DateTime } = require('luxon');
+const pluginRss = require("@11ty/eleventy-plugin-rss");
+const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
 
+module.exports = function(eleventyConfig) {
   // Create an alias for the base layer so we can reference it as base rather than the full paht.
   eleventyConfig.addLayoutAlias('base', 'layouts/base.njk');
   eleventyConfig.addLayoutAlias('post', 'layouts/post.njk');
+
+  // Date helper
+  eleventyConfig.addFilter('readableDate', dateObj => {
+    return DateTime.fromJSDate(dateObj, {
+      zone: 'utc'
+    }).toFormat('LLLL d, y');
+  });
+  eleventyConfig.addFilter('htmlDate', dateObj => {
+    return DateTime.fromJSDate(dateObj, {
+      zone: 'utc'
+    }).toFormat('y-MM-dd');
+  });
+
+  eleventyConfig.addPlugin(pluginRss);
+  eleventyConfig.addPlugin(syntaxHighlight, {
+    alwaysWrapLineHighlights: false,
+    trim: false,
+  });
 
   // As our CSS is generated in to a folder that git ignores, we want to make sure eleventy still reads it
   eleventyConfig.setUseGitIgnore(false);
 
   // Watch our generated CSS file for changes
   eleventyConfig.addWatchTarget("./.tmp/css/style.css");
-  // If it changes, write it to our generated full site
+  
+  // Passthrough additional files and folders
   eleventyConfig.addPassthroughCopy({ "./.tmp/css/style.css": "static/css/style.css" });
+  eleventyConfig.addPassthroughCopy({ "./src/site/_includes/fonts": "static/fonts" });
+  eleventyConfig.addPassthroughCopy({ "./src/site/_includes/img": "static/img" });
+  eleventyConfig.addPassthroughCopy({ "./src/site/assets": "assets" });
+  leventyConfig.addPassthroughCopy({ "./src/site/robots.txt": "robots.txt" });
 
   return  {
     dir: {
@@ -21,7 +47,7 @@ module.exports = function(eleventyConfig) {
       output: "dist"
     },
     passthroughFileCopy: true,
-    templateFormats : ["njk", "md"],
+    templateFormats : ["njk", "md", "webmanifest"],
     htmlTemplateEngine : "njk",
     markdownTemplateEngine : "njk",
   };

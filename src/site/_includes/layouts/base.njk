@@ -4,15 +4,44 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width,
     initial-scale=1.0">
+
+    <meta name="twitter:card" content="summary">
+    <meta name="twitter:site" content="@seanherron" />
+    <meta name="twitter:creator" content="@seanherron" />
+    <meta name="twitter:title" content="{{ title }}" />
+    <meta property="twitter:description" content="{%- if description -%}{{ description }}{%- else -%}The personal website of Sean Herron{%- endif -%}" />
+    {% if card %}
+    <meta name="twitter:image" content="https://seanherron.com/assets/{{ card }}" />
+    {% if card_alt %}
+    <meta name="twitter:image:alt" content="{{ card_alt }}" />
+    {% endif %}
+    {% endif %}
+    <meta property="og:url" content="https://seanherron.com{{ page.url }}" />
+    <meta property="og:title" content="{{ title }}" />
+    <meta property="og:description" content="{%- if description -%}{{ description }}{%- else -%}The personal website of Sean Herron{%- endif -%}" />
+
     <link rel="stylesheet" href="/static/css/style.css">
+
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+    <link rel="manifest" href="/site.webmanifest">
+
     <title>{{ title }} | My Site</title>
   </head>
   <body>
   <header>
       <a class="/">My Site!</a>
   </header>
-  
-  {{ content | safe }}
 
+  <div class="container">
+    {{ content | safe }}
+  </div>
+
+  <footer>
+    &copy; 2021 Sean Herron
+  </footer>
+
+   <div class="hidden bg-green-500 absolute bottom-0"><span class="sm:hidden md:hidden lg:hidden xl:hidden 2xl:hidden">None</span> <span class="hidden sm:inline md:hidden lg:hidden xl:hidden 2xl:hidden">Small</span> <span class="hidden sm:hidden md:inline lg:hidden xl:hidden 2xl:hidden">Medium</span> <span class="hidden sm:hidden md:hidden lg:inline xl:hidden 2xl:hidden">Large</span> <span class="hidden sm:hidden md:hidden lg:hidden xl:inline 2xl:hidden">XL</span> <span class="hidden sm:hidden md:hidden lg:hidden xl:hidden 2xl:inline">2XL</span></div>
   </body>
 </html>
