@@ -1,6 +1,8 @@
 const { DateTime } = require('luxon');
 const pluginRss = require("@11ty/eleventy-plugin-rss");
 const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
+const markdownIt = require("markdown-it");
+const markdownItAnchor = require("markdown-it-anchor");
 
 module.exports = function(eleventyConfig) {
   // Create an alias for the base layer so we can reference it as base rather than the full paht.
@@ -36,13 +38,27 @@ module.exports = function(eleventyConfig) {
   eleventyConfig.addPassthroughCopy({ "./src/site/_includes/fonts": "static/fonts" });
   eleventyConfig.addPassthroughCopy({ "./src/site/_includes/img": "static/img" });
   eleventyConfig.addPassthroughCopy({ "./src/site/assets": "assets" });
-  leventyConfig.addPassthroughCopy({ "./src/site/robots.txt": "robots.txt" });
+  eleventyConfig.addPassthroughCopy({ "./src/site/robots.txt": "robots.txt" });
+
+  /* Markdown Overrides */
+  let markdownLibrary = markdownIt({
+    html: true,
+    breaks: true,
+    linkify: true,
+  }).use(markdownItAnchor, {
+    permalink: true,
+    permalinkClass: "direct-link",
+    permalinkSymbol: "#",
+    level: 2,
+  });
+  eleventyConfig.setLibrary("md", markdownLibrary);
 
   return  {
     dir: {
       // Where to look for our site
       input: "src/site",
       includes: "_includes",
+      data: "_data",
       // Where to place our generated site
       output: "dist"
     },

@@ -3,13 +3,13 @@
   "permalink": "feed.xml",
   "eleventyExcludeFromCollections": true,
   "metadata": {
-    "title": "Sean Herron",
-    "subtitle": "Personal blog of Sean Herron",
-    "url": "https://seanherron.com/",
-    "feedUrl": "https://seanherron.com/feed.xml",
+    "title": "{{ site.title }}",
+    "subtitle": "{{ site.description }}",
+    "url": "{{ site.url}}",
+    "feedUrl": "{{ site.url }}/feed.xml",
     "author": {
-      "name": "Sean Herron",
-      "email": "sean@mizron.net"
+      "name": "{{ site.author }}",
+      "email": "{{ site.email }}"
     }
   }
 }

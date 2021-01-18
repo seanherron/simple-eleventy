@@ -1,0 +1,14 @@
+{
+  "title": "Simple Eleventy",
+  "description": "A basic template for Eleventy",
+  "url": "https://seanherron.com",
+  "author": "Sean Herron",
+  "email": "sean@mizron.net",
+  "opengraph": {
+    "twitter": {
+      "username": "@seanherron",
+      "card_url": "Default URL for an image to use as the Twitter card (suggest 4096x4096)",
+      "card_alt": "Default alt text for the twitter card"
+    }
+  }
+}
